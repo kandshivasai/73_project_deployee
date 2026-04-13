@@ -1,4 +1,4 @@
-<!-- Emp_list.html -->
+<!-- Emp_list.html
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,7 @@
     <th>emp_age</th>
     <th>emp_salary</th>
     <th>emp_mobile</th>
-    <th>Edit </th>
+    <th>Edit</th>
     <th>Delete</th>
     
 </tr>
@@ -46,6 +46,64 @@
     {{ form.as_p }}
 
     <input type="submit">
+</form>
+
+</body>
+</html> -->
+
+
+
+<!-- Emp_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+</head>
+<body>
+
+<table border="2">
+<tr>
+    <th>emp_name</th>
+    <th>emp_id</th>
+    <th>emp_age</th>
+    <th>emp_salary</th>
+    <th>emp_mobile</th>
+    <th>Edit</th>
+    <th>Delete</th>
+</tr>
+
+{% for x in data %}
+<tr>
+    <td>{{ x.emp_name }}</td>
+    <td>{{ x.emp_id }}</td>
+    <td>{{ x.emp_age }}</td>
+    <td>{{ x.emp_salary }}</td>
+    <td>{{ x.emp_mobile }}</td>
+
+    <td>
+        <a href="{% url 'employee_update' x.id %}">Edit</a>
+    </td>
+
+    <td>
+        <a href="{% url 'employee_delete' x.id %}">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+
+    <p>Emp name: {{ form.emp_name }}</p>
+    <p>Emp id: {{ form.emp_id }}</p>
+    <p>Emp age: {{ form.emp_age }}</p>
+    <p>Emp salary: {{ form.emp_salary }}</p>
+    <p>Emp mobile: {{ form.emp_mobile }}</p>
+
+    <input type="submit" value="Save">
 </form>
 
 </body>
